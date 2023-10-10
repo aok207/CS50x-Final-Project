@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/styles.css">
+        <link 
+            rel="stylesheet" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" 
+            referrerpolicy="no-referrer">
+        <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+        
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        <header>
+            <div class="navbar">
+                <div class="logo">
+                    <a href="/">Pick A Movie</a>
+                </div>
+                <ul class="links">
+                    <li><a href="/questions">Movie Picker</a></li>
+                    <li><a href="/movies">Trending Movies</a></li>
+                    <li><a href="/series">Trending Series</a></li>
+                </ul>
+                <a href="/questions" class="action_btn">Get Started</a>
+                <div class="toggle_btn">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+
+            <div class="dropdown_menu">
+                <li><a href="/questions">Movie Picker</a></li>
+                <li><a href="/movies">Trending Movies</a></li>
+                <li><a href="/series">Trending Series</a></li>
+                <li><a href="/questions" class="action_btn">Get Started</a></li>
+            </div>
+        </header>
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+    </body>
+    
+    <script>
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document.querySelector('.toggle_btn i')
+        const dropdownMenu = document.querySelector('.dropdown_menu')
+
+        toggleBtn.onclick = function() {
+            dropdownMenu.classList.toggle('open')
+            const isOpen = dropdownMenu.classList.contains('open')
+
+            toggleBtnIcon.classList = isOpen
+            ? 'fa-solid fa-xmark'
+            : 'fa-solid fa-bars'
+        }
+    </script>
+    <script src="/static/script.js"></script>
+</html>
