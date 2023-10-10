@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Recommendation
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <img src="{{ poster }}" alt="movie poster" id="poster" loading="eager">
+        <label for="poster" style="color: white; font-size:1em;">{{ overview }}</label>
+        <h2 style="color: white; text-shadow: 2px 2px 4px #000000; font-size: 2em; text-align: center; padding: 0.1em;">{{ title }}</h2>
+        <div id="button-container">
+            <button class="trailerButton, {% if trailer == 'None'%}hidden{% endif %}" id="trailer-button">Trailer</button>
+            <button id="regenerateButton">Regenerate Movie</button>
+        </div>
+    </div>
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <div style="display: flex; justify-content: center;">
+            <iframe id="url" src="{{ trailer }}" style="display: none;"></iframe>
+            <iframe id="video" src="" frameborder="0" allowfullscreen width="870" height="489"></iframe>
+        </div>
+    </div>
+{% endblock %}

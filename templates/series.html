@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Trending Series
+{% endblock %}
+
+{% block main %}
+    <h1 style="text-align: center; color: white; font-weight: bold;">Trending Series</h1>
+    <div class="trending-container">
+        {% for trending in series %}
+            <div class="box">
+                <div class="box-img">    
+                    <img id="trending-poster" src="{{ poster_base_url }}{{ trending['poster_path'] }}" alt="{{ trending['name'] }}">
+                    <div class="description">
+                        <h2>{{ trending['name'] }}</h2>
+                        <p>{{ trending['overview'] }}</p>
+                    </div>
+                </div>
+                <h3>{{ trending['name'] }}</h3>
+                <span>{{ trending['genre_ids'][0] }}</span>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

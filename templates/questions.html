@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Questions
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div id="question1" class="visible">
+            <h2>How are you today?</h2>
+            <label for="happy"><input type="radio" id="happy" name="response1[]" value="happy"> Happy</label><br>
+            <label for="neutral"><input type="radio" id="neutral" name="response1[]" value="neutral"> Neutral</label><br>
+            <label for="sad"><input type="radio" id="sad" name="response1[]" value="sad"> Sad</label><br>
+            <button onclick="submitAnswer(1)">Next</button>
+        </div>
+
+        <div id="question2" class="hidden">
+            <h2>Please choose any genre you're interested in.</h2>
+            <h4>Multiple answers are possible.</h4>
+            <div class="genre-column">
+                <label for="action"><input type="checkbox" id="action" name="response2[]" value="28"> Action</label><br>
+                <label for="mystery"><input type="checkbox" id="mystery" name="response2[]" value="9648"> Mystery</label><br>
+                <label for="comedy"><input type="checkbox" id="comedy" name="response2[]" value="35"> Comedy</label><br>
+                <label for="documentary"><input type="checkbox" id="documentary" name="response2[]" value="99"> Documentary</label><br>
+                <label for="drama"><input type="checkbox" id="drama" name="response2[]" value="18"> Drama</label><br>
+                <label for="history"><input type="checkbox" id="history" name="response2[]" value="36"> History</label><br>
+                <label for="adventure"><input type="checkbox" id="adventure" name="response2[]" value="12"> Adventure</label><br>
+                <label for="animation"><input type="checkbox" id="animation" name="response2[]" value="16"> Animation</label><br>
+                <label for="thriller"><input type="checkbox" id="thriller" name="response2[]" value="53"> Thriller</label><br>
+            </div>
+            <div class="genre-column">
+                <label for="music"><input type="checkbox" id="music" name="response2[]" value="10402"> Music</label><br>
+                <label for="crime"><input type="checkbox" id="crime" name="response2[]" value="80"> Crime</label><br>
+                <label for="romance"><input type="checkbox" id="romance" name="response2[]" value="10749"> Romance</label><br>
+                <label for="sci-fi"><input type="checkbox" id="sci-fi" name="response2[]" value="878"> Sci-fi</label><br>
+                <label for="western"><input type="checkbox" id="western" name="response2[]" value="37"> Western</label><br>
+                <label for="fantasy"><input type="checkbox" id="fantasy" name="response2[]" value="14"> Fantasy</label><br>
+                <label for="war"><input type="checkbox" id="war" name="response2[]" value="10752"> War</label><br>
+                <label for="family"><input type="checkbox" id="family" name="response2[]" value="10751"> Family</label><br>
+                <label for="horror"><input type="checkbox" id="horror" name="response2[]" value="27"> Horror</label><br>
+            </div>
+            <button onclick="submitAnswer(2)">Next</button>
+        </div>
+
+        <div id="question3" class="hidden">
+            <h2>How old would you like the movies to be?</h2>
+            <label for="doesnt-matter"><input type="radio" id="doesnt-matter" name="response3[]" value="doesn't-matter"> Doesn't matter</label><br>
+            <label for="3-years"><input type="radio" id="3-years" name="response3[]" value="3"> Published in the last 3 years.</label><br>
+            <label for="5-years"><input type="radio" id="5-years" name="response3[]" value="5"> Published in the last 5 years.</label><br>
+            <label for="10-years"><input type="radio" id="10-years" name="response3[]" value="10"> Published in the last 10 years.</label><br>
+            <label for="20-years"><input type="radio" id="20-years" name="response3[]" value="20"> Published in the last 20 years.</label><br>
+            <button onclick="submitAnswer(3)">Next</button>
+        </div>
+
+        <div id="question4" class="hidden">
+            <h2>Please select all MPAA ratings that you're okay with.</h2>
+            <h4>Multiple answers are possible.</h4>
+            <label for="g-rated"><input type="checkbox" id="g-rated" name="response4[]" value="G"> G-Rated: All ages admitted.</label><br>
+            <label for="pg-rated"><input type="checkbox" id="pg-rated" name="response4[]" value="PG"> PG-Rated: Some material may not be suitable for children.</label><br>
+            <label for="pg-13-rated"><input type="checkbox" id="pg-13-rated" name="response4[]" value="PG-13"> PG-13-Rated: Some material may be inappropriate for children under 13.</label><br>
+            <label for="r-rated"><input type="checkbox" id="r-rated" name="response4[]" value="R"> R-Rated: Under 17 requires accompanying parent or adult guardian.</label><br> 
+            <button onclick="submitAnswer(4)">Next</button>
+        </div>
+    </div>
+{% endblock %}

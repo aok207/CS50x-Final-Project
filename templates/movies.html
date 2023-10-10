@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Trending Movies
+{% endblock %}
+
+{% block main %}
+    <h1 style="text-align: center; color: white; font-weight: bold;">Trending Movies</h1>
+    <div class="trending-container">
+        {% for movie in movies %}
+            <div class="box">
+                <div class="box-img">    
+                    <img id="trending-poster" src="{{ poster_base_url }}{{ movie['poster_path'] }}" alt="{{ movie['title'] }}">
+                    <div class="description">
+                        <h2>{{ movie['title'] }}</h2>
+                        <p>{{ movie['overview'] }}</p>
+                    </div>
+                </div>
+                <h3>{{ movie['title'] }}</h3>
+                <span>{{ movie['genre_ids'][0] }}</span>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
