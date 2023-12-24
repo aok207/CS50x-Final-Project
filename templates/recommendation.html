@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container">
+    <div class="container" style="font-size: 1.5em;">
         <img src="{{ poster }}" alt="movie poster" id="poster" loading="eager">
         <label for="poster" style="color: white; font-size:1em;">{{ overview }}</label>
         <h2 style="color: white; text-shadow: 2px 2px 4px #000000; font-size: 2em; text-align: center; padding: 0.1em;">{{ title }}</h2>
         <div id="button-container">
-            <button class="trailerButton, {% if trailer == 'None'%}hidden{% endif %}" id="trailer-button">Trailer</button>
+            <button class="trailerButton {% if trailer == 'None'%}hidden{% endif %}" id="trailer-button">Trailer</button>
             <button id="regenerateButton">Regenerate Movie</button>
         </div>
     </div>

@@ -18,24 +18,26 @@ function submitAnswer(questionNumber) {
                     var currentQuestion = document.getElementById('question' + questionNumber);
                     var nextQuestion = document.getElementById('question' + (data.next_question));
 
-                    currentQuestion.style.display = 'none';
-                    nextQuestion.style.display = 'block';
+                    currentQuestion.classList.remove("visible");
+                    currentQuestion.classList.add("hidden");
+                    nextQuestion.classList.remove("hidden"); 
+                    nextQuestion.classList.add("visible"); 
                 } 
                 else if (data.status == 'completed') {
                     window.location.replace('/recommendation');
                 }
                 else {
-                    console.error('Server response status is not success:', data.status);
+                    alert('Server response status is not success:', data.status);
                 }
             } else {
-                console.error('Error:', xhr.status);
+                alert('Error:', xhr.status);
             }
         };
 
         var params = 'question_number=' + questionNumber + '&answer=' + responses.join('&answer=');
         xhr.send(params);
     } else {
-        console.error("No option selected for Question " + questionNumber);
+        alert("No option selected for Question " + questionNumber);
     }
 }
 
@@ -85,10 +87,10 @@ function regenerateMovie() {
                 window.location.replace('/error');
             } 
             else {
-                console.error('Server response status is not success:', data.status);
+                alert('Server response status is not success:', data.status);
             }
         } else {
-            console.error('Error:', xhr.status);
+            alert('Error:', xhr.status);
         }
     };
 
