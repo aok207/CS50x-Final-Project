@@ -2,14 +2,20 @@
 """Recommendation.py contains functions to get datas from TMDb api."""
 
 # Import needed libraries
+import os
+from dotenv import load_dotenv
 import requests
 import random
 from datetime import datetime
 
+load_dotenv()
+
 # TMDb api key and url to get posters
-tmdb_api_key = "ef5f8718309b8cd048acf93dd7c01809"
+tmdb_api_key = os.environ.get("TMDB_API_KEY")
 poster_base_url = "https://image.tmdb.org/t/p/w500"
 youtube_base_url = "https://www.youtube.com/embed/"
+
+print(tmdb_api_key)
 
 # Get the current date and time
 current_time = datetime.now()
