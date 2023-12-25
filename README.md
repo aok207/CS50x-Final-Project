@@ -1,7 +1,7 @@
 # Pick a Movie Website
 
 #### Video Demo:  <https://youtu.be/2DWyaSFVLIA>
-#### Check out the website here: <https://suggestamovieforme-com.onrender.com/> (If for some reasons, you can't see the font awesome icons, try using a vpn)
+#### Check out the website here: <https://suggestamovieforme-com.onrender.com/>
 
 #### Description:
 
