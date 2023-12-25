@@ -80,7 +80,6 @@ def get_movie_data(genres, release_year):
     genres_set = set(genres)
     common_genres = rare_set.intersection(genres_set)
     common_genres_in_list = list(common_genres)
-    print(common_genres_in_list)
 
     # Parameters to add to the url
     if len(common_genres_in_list) > 0:
@@ -153,10 +152,8 @@ def get_movie_data(genres, release_year):
     if response.status_code == 200:
         # Get the data and return the data
         data = response.json() 
-        print(data)
         # If we didn't get any data back
         if (data["total_pages"] == 0):
-            print("I got re requested!")
             # Request another with 1 page and first genre
             params = {
                 "api_key": tmdb_api_key,
