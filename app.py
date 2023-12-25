@@ -62,6 +62,7 @@ def process_answers():
 @app.route("/recommendation")
 def recommendation():
     global filtered_movies
+    print(user_answers)
     if len(user_answers) == 4:
         if user_answers[3][0] == "doesn't-matter":
             release_year = 13
@@ -72,7 +73,7 @@ def recommendation():
     
         movie_list = get_movie_data(genres, release_year)
 
-        if movie_list:
+        if len(movie_list) > 0:
             filtered_movies = movie_list
 
             if filtered_movies:

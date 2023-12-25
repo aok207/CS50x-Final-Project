@@ -15,8 +15,6 @@ tmdb_api_key = os.environ.get("TMDB_API_KEY")
 poster_base_url = "https://image.tmdb.org/t/p/w500"
 youtube_base_url = "https://www.youtube.com/embed/"
 
-print(tmdb_api_key)
-
 # Get the current date and time
 current_time = datetime.now()
 
@@ -63,20 +61,35 @@ series_genres_map = {
     37 : "Western"
 }
 
+# Rare genres
+rare_genres = [
+    "99", # Documentary
+    "36", # History
+    "37", # Western
+    "10402", # Music
+]
+# change the rare list to set
+rare_set = set(rare_genres)
 
 # Function to get movie titles from TMDb
 def get_movie_data(genres, release_year):
     # URL to get the movies informations
-    url = f"https://api.themoviedb.org/3/discover/movie"
+    url = "https://api.themoviedb.org/3/discover/movie"
+
+    # The following three lines are turning the genres list to set, and if there are any common genres between the requested list and the rare list
+    genres_set = set(genres)
+    common_genres = rare_set.intersection(genres_set)
+    common_genres_in_list = list(common_genres)
+    print(common_genres_in_list)
+
     # Parameters to add to the url
-    if '99' in genres or '36' in genres or '37' in genres or "10402" in genres:
+    if len(common_genres_in_list) > 0:
         params = {
             "api_key": tmdb_api_key,
-            "with_genres": ",".join(map(str, genres)),
+            "with_genres": common_genres_in_list[0],
             "vote_count.gte": 500,
             "vote_average.gte": 7,
             "primary_release_date.gte": f"{str(int(current_time.year) - release_year)}-01-01",  
-            "primary_release_date.lte": "2023-12-31",
             "page": 1
         } 
     elif len(genres) > 1:
@@ -86,7 +99,6 @@ def get_movie_data(genres, release_year):
             "vote_count.gte": 500,
             "vote_average.gte": 7,
             "primary_release_date.gte": f"{str(int(current_time.year) - release_year)}-01-01",  
-            "primary_release_date.lte": "2023-12-31",
             "page": random.randint(1, 2)
         }
     elif release_year == 20 or release_year == 10:
@@ -96,7 +108,6 @@ def get_movie_data(genres, release_year):
             "vote_count.gte": 500,
             "vote_average.gte": 7,
             "primary_release_date.gte": f"{str(int(current_time.year) - release_year)}-01-01",  
-            "primary_release_date.lte": "2023-12-31",
             "page": random.randint(1, 4)
         }
     elif release_year == 5:
@@ -106,7 +117,6 @@ def get_movie_data(genres, release_year):
             "vote_count.gte": 500,
             "vote_average.gte": 7,
             "primary_release_date.gte": f"{str(int(current_time.year) - release_year)}-01-01",  
-            "primary_release_date.lte": "2023-12-31",
             "page": random.randint(1, 3)
         }
     elif release_year == 3:
@@ -116,7 +126,6 @@ def get_movie_data(genres, release_year):
             "vote_count.gte": 500,
             "vote_average.gte": 7,
             "primary_release_date.gte": f"{str(int(current_time.year) - release_year)}-01-01",  
-            "primary_release_date.lte": "2023-12-31",
             "page": random.randint(1, 2)
         }
     elif release_year == 13:
@@ -126,7 +135,6 @@ def get_movie_data(genres, release_year):
             "vote_count.gte": 500,
             "vote_average.gte": 7,
             "primary_release_date.gte": f"{str(int(current_time.year) - release_year)}-01-01",  
-            "primary_release_date.lte": "2023-12-31",
             "page": random.randint(1, 5)
         }
     else:
@@ -135,8 +143,8 @@ def get_movie_data(genres, release_year):
             "with_genres": ",".join(map(str, genres)),
             "vote_count.gte": 500,
             "vote_average.gte": 7,
-            "primary_release_date.gte": f"{str(int(current_time.year) - release_year)}-01-01",  
-            "primary_release_date.lte": "2023-12-31"
+            "primary_release_date.gte": f"{str(int(current_time.year) - release_year)}-01-01",
+            "page": random.randint(1, 8)  
         }
 
     # Make the api request
@@ -145,6 +153,26 @@ def get_movie_data(genres, release_year):
     if response.status_code == 200:
         # Get the data and return the data
         data = response.json() 
+        print(data)
+        # If we didn't get any data back
+        if (data["total_pages"] == 0):
+            print("I got re requested!")
+            # Request another with 1 page and first genre
+            params = {
+                "api_key": tmdb_api_key,
+                "with_genres": genres[0],
+                "vote_count.gte": 500,
+                "vote_average.gte": 7,
+                "primary_release_date.gte": f"{str(int(current_time.year) - release_year)}-01-01",  
+                "page": 1
+            }
+            new_response = requests.get(url, params=params)
+
+            if new_response.status_code == 200:
+                new_data = new_response.json()
+                return new_data["results"]
+            else:
+                return None
         return data["results"]
     # If the request is not successful
     else:
